@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width">
+
+    <title>We重邮 - 微信小程序</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <div class="wx-box">
+        <img class="wx" src="img/weapp.png">
+        <span>微信小程序</span>
+    </div>
+    <div class="btns-box">
+        <a class="btn-link" href="https://github.com/ToadWoo/bookbox-wxapp" target="_blank">
+            <span class="box-tip">
+                <img class="icon" src="img/github.png">
+                <span class="tip-text">Star</span>
+            </span>
+            <span class="box-tip github-count">-</span>
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="imgs">
+        <div class="phone-box"><img class="box-bg" src="img/phone.png">
+            <div class="box-content">
+                <div class="box-inner">
+                    <img class="box-img" src="img/pic1.png">
+                    <img class="box-img" src="img/pic2.png">
+                    <img class="box-img" src="img/pic3.png">
+                    <img class="box-img" src="img/pic4.png">
+                    <img class="box-img" src="img/pic1.png">
+                    <img class="box-img" src="img/pic2.png">
+                    <img class="box-img" src="img/pic3.png">
+                    <img class="box-img" src="img/pic4.png">
+                    <img class="box-img" src="img/pic1.png">
+                    <img class="box-img" src="img/pic2.png">
+
+                </div>
+            </div>
+        </div>
+        <div class="box-shadow"></div>
+    </div>
+    <div class="content">
+        <div class="title">
+            <img class="logo" src="img/logo.png">
+            <img class="text" src="img/bookbox-tit.png">
+        </div>
+        <div class="define">
+            <span class="define-text"></span>
+        </div>
+        <div class="docs">
+            <span class="docs-text">图书盒子Pro是一款微信小程序，无需下载与安装即可在微信内被便捷地使用，同时可以与原始APP媲美的用户体验。打破了原始学校难用繁琐的图书馆查询系统，让集大学生借书不再难。</span>
+            <span class="docs-text">图书盒子Pro能够让你简单快速的搜索您要借阅的书籍</span>
+            <span class="docs-text">找书光看书名[捂脸],命名不是一本书却一样的名字...现在不用怕，因为我有图书封面啊</span>
+            <span class="docs-text">只要您绑定您的校园账号，即可清晰查看您的借阅情况。</span>
+            <span class="docs-text">并且当借阅即将到期时，我们将通过小程序的推送提醒您！</span>
+            <span class="docs-text">您可将您喜爱的书籍添加至收藏夹，方便需要借阅是快速查找</span>
+            <span class="docs-text">这里您可以和同学们一起探讨评论每一本书，是给借书人的一个推荐，也是同本书阅读者的交流天地</span>
+            <span class="docs-text">有了到期提醒，当你想续借，却难以简便的续借，我们正在努力的完成此功能</span>
+
+            <span class="docs-text docs-img-mark"></span>
+        </div>
+        <a class="btn" href="javascript:void(0);">
+            <span class="text">立即体验</span>
+            <span class="active">微信扫一扫</span>
+        </a>
+        <img class="enter" src="img/enter.jpg"></div>
+</div>
+<div class="footer"><a href="http://www.toadw.cn">@ Toad</a></div>
+<script src="js/jquery.min.js"></script>
+<script src="js/typed.min.js"></script>
+<script>$(function () {
+    $(".btn").click(function () {
+        $(".btn").toggleClass('active');
+        $(".enter").toggleClass('active');
+    });
+    $(".define-text").typed({
+        strings: ["微信小程序", "急速搜索", "匹配图书封面","借阅查询","到期提醒", "书籍收藏", "书籍评论",  "即将到来的续借功能", "期待您的发现"],
+        typeSpeed: 100,
+        backDelay: 5000,
+        backSpeed: 50,
+        loop: true,
+        cursorChar: "_",
+        preStringTyped: function () {
+            var list = $('.docs-text'),
+                active = $('.docs-text.active'),
+                next;
+            if (!active.length) {
+                next = $(list[0]);
+            } else {
+                next = active.next();
+                if (!next.length) {
+                    next = $(list[0]);
+                }
+                active.removeClass('active');
+            }
+            next.addClass('active');
+            if (next.is('.docs-img-mark')) {
+                $('.enter').addClass('inner');
+                $('.btn').hide();
+            } else {
+                $('.enter').removeClass('inner');
+                $('.btn').show();
+            }
+
+            var box_inner = $('.box-inner'),
+                left = box_inner.data('left');
+            if (!left || left >= 235 * 9) {
+                left = 0;
+            }
+            left = left + 235;
+            box_inner.css('transform', 'translate3d(-' + left + 'px,0,0)');
+            box_inner.data('left', left);
+        }
+    });
+    $.getJSON("https://api.github.com/repos/ToadWoo/bookbox-wxapp", function (res) {
+        $(".github-count").text(res.stargazers_count);
+    });
+});
+/* CNZZ统计 */
+$(function () {
+    var box = document.createElement("div"),
+        cnzz = document.createElement("script");
+    box.style.display = "none";
+    cnzz.src = "https://s95.cnzz.com/z_stat.php?id=1261321696&web_id=1261321696";
+    box.appendChild(cnzz);
+    document.body.appendChild(box);
+});
+</script>
+</body>
+</html>
